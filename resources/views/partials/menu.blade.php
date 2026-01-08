@@ -7,5 +7,7 @@
 
     <li><a class="text-white hover:underline" href="{{ route('estadis.index') }}">Llistat d'Estadis</a></li>
     <li><a class="text-white hover:underline" href="{{ route('equips.index') }}">Llistat d'Equips</a></li>
+    <li><a class="text-white hover:underline" href="{{ route('jugadors.index') }}">Llistat de Jugadors</a></li>
+    <li><a class="text-white hover:underline" href="{{ route('partits.index') }}">Llistat de Partits</a></li>
   </ul>
 </nav>

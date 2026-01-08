@@ -13,6 +13,23 @@ return new class extends Migration
     {
         Schema::create('partits', function (Blueprint $table) {
             $table->id();
+
+            $table->foreignId('local_id')
+                ->constrained('equips')
+                ->onDelete('cascade');
+
+            $table->foreignId('visitant_id')
+                ->constrained('equips')
+                ->onDelete('cascade');
+
+            $table->foreignId('estadi_id')
+                ->constrained()
+                ->onDelete('cascade');
+
+            $table->date('data');
+            $table->integer('jornada');
+            $table->string('gols')->nullable(); // ej: "2-1"
+
             $table->timestamps();
         });
     }

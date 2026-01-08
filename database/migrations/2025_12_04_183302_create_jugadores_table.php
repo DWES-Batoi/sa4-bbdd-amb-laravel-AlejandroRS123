@@ -11,12 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('jugadores', function (Blueprint $table) {
+        Schema::create('jugadors', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('equip_id')->constrained();;
+            $table->string('nom');
+            $table->foreignId('equip_id')
+                  ->constrained()
+                  ->onDelete('cascade');
             $table->date('data_naixement');
-            $table->text('dorsal');
-            $table->text('foto');
+            $table->integer('dorsal');
+            $table->string('foto')->nullable();
+            $table->timestamps();
         });
     }
 
