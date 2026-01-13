@@ -6,7 +6,7 @@
 'foto' => null
 ])
 
-<div class="jugador border rounded-lg shadow-md p-4 bg-white">
+<div class="jugador border rounded-lg shadow-md p-4 bg-blue-gray-800>
     <h2 class="text-xl font-bold text-green-800">{{ $nom }}</h2>
     <p><strong>Equip:</strong> {{ $equip }}</p>
     <p><strong>Dorsal:</strong> {{ $dorsal }}</p>

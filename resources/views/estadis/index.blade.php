@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.equip')
 @section('title', "Guia d'Estadis")
 
 @section('content')
@@ -17,8 +17,8 @@
 <table class="w-full border-collapse border border-gray-300">
   <thead class="bg-gray-200">
     <tr>
-      <th class="border border-gray-300 p-2">Nom</th>
-      <th class="border border-gray-300 p-2">Capacitat</th>
+      <th class="border border-gray-300 bg-blue-500 p-2">Nom</th>
+      <th class="border border-gray-300 bg-blue-500 p-2">Capacitat</th>
     </tr>
   </thead>
   <tbody>

@@ -1,4 +1,4 @@
-<div class="equip border rounded-lg shadow-md p-4 bg-white">
+<div class="equip border rounded-lg shadow-md p-4 bg-blue-gray-800">
   @if ($equip->escut)
   <img src="{{ asset('storage/' . $equip->escut) }}"
     alt="Escut de {{ $equip->nom }}"

@@ -7,7 +7,7 @@
 'gols' => '—'
 ])
 
-<div class="partit border rounded-lg shadow-md p-4 bg-white">
+<div class="partit border rounded-lg shadow-md p-4 bg-blue-gray-800">
     <h2 class="text-xl font-bold text-purple-800">
         Jornada {{ $jornada }} - {{ $data }}
     </h2>

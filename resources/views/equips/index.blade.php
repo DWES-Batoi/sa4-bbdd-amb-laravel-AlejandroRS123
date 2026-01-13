@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.equip')
+@section('title', "Guia d'Equips")
 @section('content')
 <div class="container">
   <h1 class="text-3xl font-bold text-blue-800 mb-6">Listado de equipos</h1>
