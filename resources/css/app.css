@@ -69,3 +69,9 @@
 .inline {
     display: inline;
 }
+input {
+    background-color: #1d4346;
+}
+select {
+    background-color: #1d4346;
+}

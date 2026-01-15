@@ -1,5 +1,5 @@
 @extends('layouts.equip')
-@section('title', 'Afegir nou equip')
+@section('title', 'Añadir nuevo equipo')
 
 @section('content')
 <h1 class="text-2xl font-bold mb-4">Añadir nuevo equipo</h1>

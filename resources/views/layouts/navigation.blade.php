@@ -13,25 +13,25 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('equips.index')" :active="request()->routeIs('equips.*')">
-                        {{ __('Equips') }}
+                        {{ __('Equipos') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('estadis.index')" :active="request()->routeIs('estadis.*')">
-                        {{ __('Estadis') }}
+                        {{ __('Estadios') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('jugadors.index')" :active="request()->routeIs('jugadors.*')">
-                        {{ __('Jugadors') }}
+                        {{ __('Jugadores') }}
                     </x-nav-link>
 
 
                     <x-nav-link :href="route('partits.index')" :active="request()->routeIs('partits.*')">
-                        {{ __('Partits') }}
+                        {{ __('Partidos') }}
                     </x-nav-link>
 
                     @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Panel de control') }}
                     </x-nav-link>
                     @endauth
                 </div>
