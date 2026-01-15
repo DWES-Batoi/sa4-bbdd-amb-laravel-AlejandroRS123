@@ -2,7 +2,7 @@
 @section('title', 'Afegir nou equip')
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4">Afegir nou equip</h1>
+<h1 class="text-2xl font-bold mb-4">Añadir nuevo equipo</h1>
 
 @if ($errors->any())
 <div class="bg-red-100 text-red-700 p-2 mb-4">
@@ -17,7 +17,7 @@
 <form action="{{ route('equips.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
   @csrf
   <div>
-    <label for="nom" class="block font-bold">Nom:</label>
+    <label for="nom" class="block font-bold">Nombre:</label>
     <input
       type="text"
       name="nom"
@@ -27,7 +27,7 @@
   </div>
 
   <div>
-    <label for="estadi_id" class="block font-bold">Estadi:</label>
+    <label for="estadi_id" class="block font-bold">Estadio:</label>
     <select name="estadi_id" id="estadi_id" class="border p-2 w-full">
       @foreach ($estadis as $estadi)
       <option value="{{ $estadi->id }}"
@@ -39,7 +39,7 @@
   </div>
 
   <div>
-    <label for="titols" class="block font-bold">Títols:</label>
+    <label for="titols" class="block font-bold">Títulos:</label>
     <input
       type="number"
       name="titols"
@@ -58,7 +58,7 @@
   </div>
 
   <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded">
-    Afegir
+    Añadir
   </button>
 </form>
 @endsection

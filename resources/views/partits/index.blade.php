@@ -6,7 +6,7 @@
     <h1 class="text-3xl font-bold text-purple-800 mb-6">Listado de Partidos</h1>
     <p class="mb-4">
         <a href="{{ route('partits.create') }}" class="bg-blue-600 text-white px-3 py-2 rounded">
-            Nou Partit
+            Nuevo partido
         </a>
     </p>
 
@@ -19,9 +19,9 @@
             </header>
             <div class="card__body">
                 <p><strong>Local:</strong> {{ $partit->local->nom ?? '—' }}</p>
-                <p><strong>Visitant:</strong> {{ $partit->visitant->nom ?? '—' }}</p>
-                <p><strong>Estadi:</strong> {{ $partit->estadi->nom ?? '—' }}</p>
-                <p><strong>Gols:</strong> {{ $partit->gols ?? '—' }}</p>
+                <p><strong>Visitante:</strong> {{ $partit->visitant->nom ?? '—' }}</p>
+                <p><strong>Estadio:</strong> {{ $partit->estadi->nom ?? '—' }}</p>
+                <p><strong>Goles:</strong> {{ $partit->gols ?? '—' }}</p>
             </div>
             <footer class="card__footer">
                 <a class="btn btn--ghost" href="{{ route('partits.show', $partit) }}">Ver</a>

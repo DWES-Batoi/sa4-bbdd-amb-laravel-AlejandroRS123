@@ -6,7 +6,7 @@
     <h1 class="text-3xl font-bold text-green-800 mb-6">Listado de Jugadores</h1>
     <p class="mb-4">
         <a href="{{ route('jugadors.create') }}" class="bg-blue-600 text-white px-3 py-2 rounded">
-            Nou Jugador
+            Nuevo jugador
         </a>
     </p>
 
@@ -18,9 +18,9 @@
                 <span class="card__badge">ID: {{ $jugador->id }}</span>
             </header>
             <div class="card__body">
-                <p><strong>Equip:</strong> {{ $jugador->equip->nom ?? '—' }}</p>
+                <p><strong>Equipo:</strong> {{ $jugador->equip->nom ?? '—' }}</p>
                 <p><strong>Dorsal:</strong> {{ $jugador->dorsal }}</p>
-                <p><strong>Data naixement:</strong> {{ $jugador->data_naixement }}</p>
+                <p><strong>Fecha de nacimiento:</strong> {{ $jugador->data_naixement }}</p>
             </div>
             <footer class="card__footer">
                 <a class="btn btn--ghost" href="{{ route('jugadors.show', $jugador) }}">Ver</a>

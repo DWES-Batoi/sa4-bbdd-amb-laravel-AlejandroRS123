@@ -1,11 +1,13 @@
 @extends('layouts.equip')
-@section('title', "Guia d'Equips")
+@section('title', "Listado de equipos")
 @section('content')
 <div class="container">
   <h1 class="text-3xl font-bold text-blue-800 mb-6">Listado de equipos</h1>
-  <a href="{{ route('equips.create') }}" class="button-nou-equip bg-blue-600 text-white px-3 py-2 rounded">
-    Añadir equipo
-  </a>
+  <p class="mb-4">
+    <a href="{{ route('equips.create') }}" class="button-nou-equip bg-blue-600 text-white px-3 py-2 rounded">
+      Añadir equipo
+    </a>
+  </p>
   <div class="grid-cards">
     @foreach ($equips as $equip)
     <article class="card">

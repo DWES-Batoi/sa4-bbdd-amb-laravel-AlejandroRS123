@@ -2,7 +2,7 @@
 @section('title', 'Afegir nou partit')
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4">Afegir nou partit</h1>
+<h1 class="text-2xl font-bold mb-4">Añadir nuevo partido</h1>
 
 @if ($errors->any())
 <div class="bg-red-100 text-red-700 p-2 mb-4">
@@ -18,7 +18,7 @@
     @csrf
 
     <div>
-        <label for="local_id" class="block font-bold">Equip Local:</label>
+        <label for="local_id" class="block font-bold">Equipo local:</label>
         <select name="local_id" id="local_id" class="border p-2 w-full">
             @foreach ($equips as $equip)
             <option value="{{ $equip->id }}" {{ old('local_id') == $equip->id ? 'selected' : '' }}>
@@ -29,7 +29,7 @@
     </div>
 
     <div>
-        <label for="visitant_id" class="block font-bold">Equip Visitant:</label>
+        <label for="visitant_id" class="block font-bold">Equipl visitante:</label>
         <select name="visitant_id" id="visitant_id" class="border p-2 w-full">
             @foreach ($equips as $equip)
             <option value="{{ $equip->id }}" {{ old('visitant_id') == $equip->id ? 'selected' : '' }}>
@@ -40,7 +40,7 @@
     </div>
 
     <div>
-        <label for="estadi_id" class="block font-bold">Estadi:</label>
+        <label for="estadi_id" class="block font-bold">Estadio:</label>
         <select name="estadi_id" id="estadi_id" class="border p-2 w-full">
             @foreach ($estadis as $estadi)
             <option value="{{ $estadi->id }}" {{ old('estadi_id') == $estadi->id ? 'selected' : '' }}>
@@ -51,7 +51,7 @@
     </div>
 
     <div>
-        <label for="data" class="block font-bold">Data:</label>
+        <label for="data" class="block font-bold">Fecha:</label>
         <input type="date" name="data" id="data" value="{{ old('data') }}" class="border p-2 w-full">
     </div>
 
@@ -61,7 +61,7 @@
     </div>
 
     <div>
-        <label for="gols" class="block font-bold">Gols:</label>
+        <label for="gols" class="block font-bold">Goles:</label>
         <input type="text" name="gols" id="gols" value="{{ old('gols') }}" class="border p-2 w-full">
     </div>
 
