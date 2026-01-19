@@ -25,6 +25,7 @@ class EquipFactory extends Factory
     {
         return [
             'nom'       => $this->faker->unique()->company,
+            'ciudad'    => $this->faker->city,
             'titols'    => $this->faker->numberBetween(0, 50),
             // Crearà també un Estadi associat si no en passem cap
             'estadi_id' => Estadi::factory(),

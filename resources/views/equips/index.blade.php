@@ -16,7 +16,7 @@
         <span class="card__badge">ID: {{ $equip->id }}</span>
       </header>
       <div class="card__body">
-        <p><strong>{{__("Ciudad")}}:</strong> {{ $equip->ciutat ?? '—' }}</p>
+        <p><strong>{{__("Ciudad")}}:</strong> {{ $equip->ciudad ?? '—' }}</p>
         <p><strong>{{__("Estadio")}}:</strong> {{ $equip->estadi->nom ?? '—' }}</p>
       </div>
       <footer class="card__footer">

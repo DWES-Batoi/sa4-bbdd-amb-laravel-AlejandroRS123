@@ -10,6 +10,11 @@
         @error('nom') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
     <div>
+        <label class="block text-sm font-medium">{{__("Ciudad")}}:</label>
+        <input type="text" name="ciudad" value="{{ old('ciudad', $equip->ciudad) }}" class="w-full border rounded p-2">
+        @error('ciudad') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
+    </div>
+    <div>
         <label class="block text-sm font-medium">{{__("Estadio")}}:</label>
         <select name="estadi_id" class="w-full border rounded p-2">
             @foreach($estadis as $estadi)

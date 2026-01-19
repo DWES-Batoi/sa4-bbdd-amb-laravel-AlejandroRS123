@@ -23,6 +23,7 @@ class UpdateEquipRequest extends FormRequest
     {
         return [
             'nom'       => 'required|min:3',
+            'ciudad' => 'required|string|max:255',
             'estadi_id' => 'required|integer|exists:estadis,id',
             'titols'    => 'required|integer|min:0',
             'escut'     => 'sometimes|nullable|image|mimes:jpeg,png,jpg|max:2048',

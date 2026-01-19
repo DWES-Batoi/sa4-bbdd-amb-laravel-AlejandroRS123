@@ -15,22 +15,30 @@ class EquipsSeeder extends Seeder
         $estadi = Estadi::where('nom', 'Camp Nou')->first();
         $estadi->equips()->updateOrCreate(
             ['nom' => 'Barça Femení'],
-            ['titols' => 30]
+            [
+                'ciudad' => 'Barcelona',
+                'titols' => 30
+            ]
         );
 
         $estadi = Estadi::where('nom', 'Wanda Metropolitano')->first();
         $estadi->equips()->updateOrCreate(
             ['nom' => 'Atlètic de Madrid'],
-            ['titols' => 10]
+            [
+                'ciudad' => 'Madrid',
+                'titols' => 10
+            ]
         );
 
         $estadi = Estadi::where('nom', 'Santiago Bernabéu')->first();
         $estadi->equips()->updateOrCreate(
             ['nom' => 'Real Madrid Femení'],
-            ['titols' => 5]
+            [
+                'ciudad' => 'Madrid',
+                'titols' => 5
+            ]
         );
 
-        // Si tens UNIQUE a equips.nom i la factory pot repetir noms, posa unique() a la factory
         Equip::factory()->count(10)->create();
 
         foreach (Equip::all() as $equip) {

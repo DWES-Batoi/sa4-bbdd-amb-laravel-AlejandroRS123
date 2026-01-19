@@ -17,6 +17,7 @@ class EquipService
         }
         return $this->repo->create($data);
     }
+
     public function actualitzar(int $id, array $data, ?UploadedFile $escut = null): Equip
     {
         $equip = $this->repo->find($id);
@@ -26,8 +27,10 @@ class EquipService
             }
             $data['escut'] = $escut->store('escuts', 'public');
         }
+        $data['ciudad'] = $data['ciudad'] ?? $equip->ciudad;
         return $this->repo->update($id, $data);
     }
+
     public function eliminar(int $id): void
     {
         $equip = $this->repo->find($id);
@@ -36,6 +39,7 @@ class EquipService
         }
         $this->repo->delete($id);
     }
+
     public function llistar()
     {
         return $this->repo->getAll();

@@ -5,6 +5,7 @@
     class="h-12 w-12 object-cover rounded-full mb-2">
   @endif
   <h2 class="text-xl font-bold text-blue-800">{{ $equip->nom }}</h2>
+  <p><strong>{{__("Ciudad")}}:</strong> {{ $equip->ciudad }}</p>
   <p><strong>{{__("Estadio")}}:</strong> {{ $equip->estadi->nom }}</p>
   <p><strong>{{__("Títulos")}}:</strong> {{ $equip->titols }}</p>
 </div>

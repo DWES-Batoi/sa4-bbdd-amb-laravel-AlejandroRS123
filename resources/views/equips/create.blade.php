@@ -2,7 +2,7 @@
 @section('title', __('Añadir nuevo equipo'))
 
 @section('content')
-<h1 class="text-2xl font-bold mb-4">__('Añadir nuevo equipo')</h1>
+<h1 class="text-2xl font-bold mb-4">{{__('Añadir nuevo equipo')}}</h1>
 
 @if ($errors->any())
 <div class="bg-red-100 text-red-700 p-2 mb-4">
@@ -17,7 +17,7 @@
 <form action="{{ route('equips.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
   @csrf
   <div>
-    <label for="nom" class="block font-bold">__('Nombre'):</label>
+    <label for="nom" class="block font-bold">{{__('Nombre')}}:</label>
     <input
       type="text"
       name="nom"
@@ -27,7 +27,17 @@
   </div>
 
   <div>
-    <label for="estadi_id" class="block font-bold">__('Estadio'):</label>
+    <label for="ciudad" class="block font-bold">{{__('Ciudad')}}:</label>
+    <input
+      type="text"
+      name="ciudad"
+      id="ciudad"
+      value="{{ old('ciudad') }}"
+      class="border p-2 w-full">
+  </div>
+
+  <div>
+    <label for="estadi_id" class="block font-bold">{{__('Estadio')}}:</label>
     <select name="estadi_id" id="estadi_id" class="border p-2 w-full">
       @foreach ($estadis as $estadi)
       <option value="{{ $estadi->id }}"
@@ -39,7 +49,7 @@
   </div>
 
   <div>
-    <label for="titols" class="block font-bold">__('Títulos'):</label>
+    <label for="titols" class="block font-bold">{{__('Títulos')}}:</label>
     <input
       type="number"
       name="titols"
