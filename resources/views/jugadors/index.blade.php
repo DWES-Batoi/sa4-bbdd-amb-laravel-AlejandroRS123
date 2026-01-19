@@ -1,12 +1,12 @@
 @extends('layouts.equip')
-@section('title', 'Jugadors')
+@section('title', __('Jugadores'))
 
 @section('content')
 <div class="container">
-    <h1 class="text-3xl font-bold text-green-800 mb-6">Listado de Jugadores</h1>
+    <h1 class="text-3xl font-bold text-green-800 mb-6">{{__("Listado de Jugadores")}}</h1>
     <p class="mb-4">
         <a href="{{ route('jugadors.create') }}" class="bg-blue-600 text-white px-3 py-2 rounded">
-            Nuevo jugador
+            {{__("Nuevo jugador")}}
         </a>
     </p>
 
@@ -18,17 +18,17 @@
                 <span class="card__badge">ID: {{ $jugador->id }}</span>
             </header>
             <div class="card__body">
-                <p><strong>Equipo:</strong> {{ $jugador->equip->nom ?? '—' }}</p>
-                <p><strong>Dorsal:</strong> {{ $jugador->dorsal }}</p>
-                <p><strong>Fecha de nacimiento:</strong> {{ $jugador->data_naixement }}</p>
+                <p><strong>{{__("Equipo")}}:</strong> {{ $jugador->equip->nom ?? '—' }}</p>
+                <p><strong>{{__("Dorsal")}}:</strong> {{ $jugador->dorsal }}</p>
+                <p><strong>{{__("Fecha de nacimiento")}}:</strong> {{ $jugador->data_naixement }}</p>
             </div>
             <footer class="card__footer">
-                <a class="btn btn--ghost" href="{{ route('jugadors.show', $jugador) }}">Ver</a>
-                <a class="btn btn--primary" href="{{ route('jugadors.edit', $jugador) }}">Editar</a>
+                <a class="btn btn--ghost" href="{{ route('jugadors.show', $jugador) }}">{{__("Ver")}}</a>
+                <a class="btn btn--primary" href="{{ route('jugadors.edit', $jugador) }}">{{__("Editar")}}</a>
                 <form method="POST" action="{{ route('jugadors.destroy', $jugador) }}" class="inline">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn--danger" type="submit">Eliminar</button>
+                    <button class="btn btn--danger" type="submit">{{__("Eliminar")}}</button>
                 </form>
             </footer>
         </article>

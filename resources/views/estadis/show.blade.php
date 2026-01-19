@@ -1,5 +1,5 @@
 @extends('layouts.equip')
-@section('title', "Detall d'Estadi")
+@section('title', __("Detalle de estadio"))
 
 @section('content')
   <x-estadi

@@ -6,6 +6,7 @@ use App\Http\Controllers\EquipController;
 use App\Http\Controllers\EstadiController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartitController;
+use Illuminate\Support\Facades\Session;
 
 // Página de bienvenida
 Route::get('/', fn() => view('welcome'));
@@ -14,6 +15,19 @@ Route::get('/', fn() => view('welcome'));
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+// Cambio de idioma
+Route::get('/locale/{locale}', function (string $locale) {
+    $available = ['ca', 'es', 'en'];
+
+    if (!in_array($locale, $available, true)) {
+        $locale = config('app.fallback_locale', 'en');
+    }
+
+    Session::put('locale', $locale);
+
+    return redirect()->back();
+})->name('setLocale');
 
 // =====================
 // 🔹 Rutas públicas SIN parámetros

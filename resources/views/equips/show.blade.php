@@ -1,5 +1,5 @@
 @extends('layouts.equip')
-@section('title', "Detall d'Equip")
+@section('title', __("Detalle de equipo"))
 
 @section('content')
 <x-equip :equip="$equip" />
