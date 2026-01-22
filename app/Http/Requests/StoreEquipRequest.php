@@ -28,6 +28,7 @@ class StoreEquipRequest extends FormRequest
             'titols'    => 'required|integer|min:0',
             'escut'     => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'nom'       => 'required|min:3|unique:equips,nom',
+            'ciudad' => 'required|string|max:255',
         ];
     }
 }

@@ -20,6 +20,11 @@ class Jugador extends Model
         'foto'
     ];
 
+    protected $casts = [
+        'data_naixement' => 'date',
+    ];
+
+
     /**
      * Un jugador pertany a un equip
      */
