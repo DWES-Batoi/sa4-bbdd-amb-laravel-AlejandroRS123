@@ -61,7 +61,7 @@
     </div>
 
     <div>
-        <label for="gols" class="block font-bold">{{__("Goles"):}}</label>
+        <label for="gols" class="block font-bold">{{__("Goles")}}:</label>
         <input type="text" name="gols" id="gols" value="{{ old('gols') }}" class="border p-2 w-full">
     </div>
 
