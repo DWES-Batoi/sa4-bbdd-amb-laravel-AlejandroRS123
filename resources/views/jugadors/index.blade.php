@@ -20,7 +20,7 @@
             <div class="card__body">
                 <p><strong>{{__("Equipo")}}:</strong> {{ $jugador->equip->nom ?? '—' }}</p>
                 <p><strong>{{__("Dorsal")}}:</strong> {{ $jugador->dorsal }}</p>
-                <p><strong>{{__("Fecha de nacimiento")}}:</strong> {{ $jugador->data_naixement }}</p>
+                <p><strong>{{__("Fecha de nacimiento")}}:</strong> {{ $jugador->data_naixement ? $jugador->data_naixement->format('d/m/Y') : '-' }}</p>
             </div>
             <footer class="card__footer">
                 <a class="btn btn--ghost" href="{{ route('jugadors.show', $jugador) }}">{{__("Ver")}}</a>
