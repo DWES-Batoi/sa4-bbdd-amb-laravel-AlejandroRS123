@@ -3,7 +3,7 @@
 'equip',
 'dorsal',
 'data_naixement',
-'foto' => null
+'foto',
 ])
 
 <div class="jugador border rounded-lg shadow-md p-4 bg-blue-gray-800">
@@ -11,7 +11,9 @@
     <p><strong>{{__("Equipo")}}:</strong> {{ $equip }}</p>
     <p><strong>{{__("Dorsal")}}:</strong> {{ $dorsal }}</p>
     <p><strong>{{__("Fecha de nacimiento")}}:</strong> {{ $data_naixement ? date('d/m/Y', strtotime($data_naixement)) : '-' }}</p>
-    @if($foto)
-    <img src="{{ $foto }}" alt="Foto de {{ $nom }}" class="mt-2 w-32 h-32 object-cover rounded">
+      @if($foto)
+    <img src="{{ asset('storage/' . $foto) }}"
+        alt="Foto de {{ $nom }}"
+        class="mt-2 w-32 h-32 object-cover rounded">
     @endif
 </div>

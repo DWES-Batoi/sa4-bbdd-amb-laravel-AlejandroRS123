@@ -1,7 +1,7 @@
 @extends('layouts.equip')
 @section('title', __("Editar jugador"))
 @section('content')
-<form action="{{ route('jugadors.update', $jugador) }}" method="POST" class="space-y-4">
+<form action="{{ route('jugadors.update', $jugador) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
     @csrf
     @method('PUT')
 
@@ -35,9 +35,16 @@
         @error('data_naixement') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 
-     <div>
+    @if($jugador->foto)
+    <div class="flex items-center gap-3">
+        <p class="text-sm text-gray-600">{{__("Foto actual")}}:</p>
+        <img src="{{ asset('storage/' . $jugador->foto) }}" class="h-12 w-12 object-cover rounded-full" alt="Foto del jugador">
+    </div>
+    @endif
+
+    <div>
         <label class="block text-sm font-medium">{{__("Nueva foto (opcional)")}}:</label>
-        <input type="file" name="foto" class="w-full border rounded p-2">
+        <input type="file" name="foto" class="w-full border rounded p-2" accept="image/*">
         @error('foto') <p class="text-red-600 text-sm">{{ $message }}</p> @enderror
     </div>
 

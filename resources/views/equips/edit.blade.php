@@ -32,8 +32,8 @@
     </div>
     @if($equip->escut)
     <div class="flex items-center gap-3">
-        <img src="{{ asset('storage/' . $equip->escut) }}" class="h-12 w-12 object-cover rounded-full" alt="Escut">
         <p class="text-sm text-gray-600">{{__("Escudo actual")}}:</p>
+        <img src="{{ asset('storage/' . $equip->escut) }}" class="h-12 w-12 object-cover rounded-full" alt="Escut">
     </div>
     @endif
     <div>

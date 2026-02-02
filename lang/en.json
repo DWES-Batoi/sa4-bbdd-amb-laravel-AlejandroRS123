@@ -47,5 +47,12 @@
     "Dorsal": "Number",
     "Nueva foto (opcional)": "New photo (optional)",
     "Editar jugador": "Edit player",
-    "Añadir nuevo estadio": "Add new stadium"
+    "Añadir nuevo estadio": "Add new stadium",
+    "Fecha": "Date",
+    "Equipo local": "Local team",
+    "Equipo visitante": "Away team",
+    "Editar partido": "Edit match",
+    "Editar jugadora": "Edita player",
+    "Editar estadio": "Edita stadium",
+    "Editar equipo": "Edit team"
 }

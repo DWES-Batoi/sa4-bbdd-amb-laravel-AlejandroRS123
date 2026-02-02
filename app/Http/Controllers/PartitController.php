@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StorePartitRequest;
-use App\Http\Requests\UpdatePartitRequest;
+use Illuminate\Http\Request;
 use App\Models\Partit;
 use App\Models\Equip;
 use App\Models\Estadi;
@@ -26,9 +25,18 @@ class PartitController extends Controller
     }
 
     // POST /partits
-    public function store(StorePartitRequest $request)
+    public function store(Request $request)
     {
-        Partit::create($request->validated());
+        $validated = $request->validate([
+            'local_id' => 'required|exists:equips,id',
+            'visitant_id' => 'required|exists:equips,id',
+            'estadi_id' => 'required|exists:estadis,id',
+            'data' => 'required|date',
+            'jornada' => 'required|integer',
+            'gols' => 'nullable|string',
+        ]);
+
+        Partit::create($validated);
 
         return redirect()->route('partits.index')
             ->with('success', 'Partit creat correctament!');
@@ -50,9 +58,18 @@ class PartitController extends Controller
     }
 
     // PUT/PATCH /partits/{partit}
-    public function update(UpdatePartitRequest $request, Partit $partit)
+    public function update(Request $request, Partit $partit)
     {
-        $partit->update($request->validated());
+        $validated = $request->validate([
+            'local_id' => 'required|exists:equips,id',
+            'visitant_id' => 'required|exists:equips,id',
+            'estadi_id' => 'required|exists:estadis,id',
+            'data' => 'required|date',
+            'jornada' => 'required|integer',
+            'gols' => 'nullable|string',
+        ]);
+
+        $partit->update($validated);
 
         return redirect()->route('partits.index')
             ->with('success', 'Partit actualitzat correctament!');

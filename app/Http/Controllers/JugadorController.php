@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreJugadorRequest;
-use App\Http\Requests\UpdateJugadorRequest;
+use Illuminate\Http\Request;
 use App\Models\Jugador;
 use App\Models\Equip;
+use Illuminate\Support\Facades\Storage;
 
 class JugadorController extends Controller
 {
     // GET /jugadors
     public function index()
     {
-        // Listar todos los jugadores con su equipo
         $jugadors = Jugador::with('equip')->get();
         return view('jugadors.index', compact('jugadors'));
     }
@@ -20,15 +19,27 @@ class JugadorController extends Controller
     // GET /jugadors/create
     public function create()
     {
-        // Necesitamos los equipos para asignar un jugador
         $equips = Equip::all();
         return view('jugadors.create', compact('equips'));
     }
 
     // POST /jugadors
-    public function store(StoreJugadorRequest $request)
+    public function store(Request $request)
     {
-        Jugador::create($request->validated());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'equip_id' => 'required|exists:equips,id',
+            'dorsal' => 'required|integer',
+            'data_naixement' => 'required|date',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Subir foto si existe
+        if ($request->hasFile('foto')) {
+            $validated['foto'] = $request->file('foto')->store('jugadors', 'public');
+        }
+
+        Jugador::create($validated);
 
         return redirect()->route('jugadors.index')
             ->with('success', 'Jugador creat correctament!');
@@ -48,9 +59,27 @@ class JugadorController extends Controller
     }
 
     // PUT/PATCH /jugadors/{jugador}
-    public function update(UpdateJugadorRequest $request, Jugador $jugador)
+    public function update(Request $request, Jugador $jugador)
     {
-        $jugador->update($request->validated());
+        $validated = $request->validate([
+            'nom' => 'required|string|max:255',
+            'equip_id' => 'required|exists:equips,id',
+            'dorsal' => 'required|integer',
+            'data_naixement' => 'required|date',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Subir nueva foto si existe
+        if ($request->hasFile('foto')) {
+            // Eliminar foto anterior si existe
+            if ($jugador->foto) {
+                Storage::disk('public')->delete($jugador->foto);
+            }
+            
+            $validated['foto'] = $request->file('foto')->store('jugadors', 'public');
+        }
+
+        $jugador->update($validated);
 
         return redirect()->route('jugadors.index')
             ->with('success', 'Jugador actualitzat correctament!');
@@ -59,6 +88,11 @@ class JugadorController extends Controller
     // DELETE /jugadors/{jugador}
     public function destroy(Jugador $jugador)
     {
+        // Eliminar foto si existe
+        if ($jugador->foto) {
+            Storage::disk('public')->delete($jugador->foto);
+        }
+
         $jugador->delete();
 
         return redirect()->route('jugadors.index')
