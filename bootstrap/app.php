@@ -8,6 +8,7 @@ use App\Http\Middleware\SetLocale;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
+        channels: __DIR__.'/../routes/channels.php',
         web: __DIR__ . '/../routes/web.php',
         api: __DIR__ . '/../routes/api.php',   // ← Añadido
         apiPrefix: 'api',                      // ← Añadido (prefijo /api)
@@ -16,6 +17,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->appendToGroup('web', SetLocale::class);
+        $middleware->alias(['not.convidat' => \App\Http\Middleware\EnsureNotConvidat::class,]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
 

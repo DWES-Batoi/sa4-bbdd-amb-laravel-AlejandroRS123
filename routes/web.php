@@ -7,6 +7,7 @@ use App\Http\Controllers\EstadiController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartitController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\AuthController;
 
 // Página de bienvenida
 Route::get('/', fn() => view('welcome'));
@@ -15,6 +16,13 @@ Route::get('/', fn() => view('welcome'));
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+
+Route::middleware(['auth', 'not.convidat'])->group(function () {
+Route::resource('equips', EquipController::class)->except(['index', 'show']);
+Route::resource('jugadors', JugadorController::class)->except(['index', 'show']);
+// ...altres recursos d’escriptura
+});
 
 // Cambio de idioma
 Route::get('/locale/{locale}', function (string $locale) {
@@ -37,7 +45,8 @@ Route::get('equips', [EquipController::class, 'index'])->name('equips.index');
 Route::get('estadis', [EstadiController::class, 'index'])->name('estadis.index');
 Route::get('jugadors', [JugadorController::class, 'index'])->name('jugadors.index');
 Route::get('partits', [PartitController::class, 'index'])->name('partits.index');
-
+Route::get('/auth/google/redirect', [AuthController::class, 'redirectToGoogle'])->name('google.redirect');
+Route::get('/auth/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.callback');
 
 // =====================
 // 🔒 Rutas protegidas (auth)
