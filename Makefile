@@ -52,8 +52,8 @@ migrate_fresh:
 	docker compose run --rm app php artisan migrate:fresh
 
 reverb:
-	docker compose exec app php artisan reverb:start
-
+	docker compose exec app php artisan reverb:start --port=8081
+	
 queue:
 	docker compose exec app php artisan queue:work
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartitController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassificacioController;
 
 // Página de bienvenida
 Route::get('/', fn() => view('welcome'));
@@ -17,7 +18,8 @@ Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
+Route::get('/classificacio', [ClassificacioController::class, 'index'])
+    ->name('classificacio.index');
 Route::middleware(['auth', 'not.convidat'])->group(function () {
 Route::resource('equips', EquipController::class)->except(['index', 'show']);
 Route::resource('jugadors', JugadorController::class)->except(['index', 'show']);

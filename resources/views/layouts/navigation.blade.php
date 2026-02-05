@@ -29,6 +29,10 @@
                         {{ __('Partidos') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('classificacio.index')" :active="request()->routeIs('classificacio.*')">
+                        {{ __('Classificació') }}
+                    </x-nav-link>
+
                     @auth
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Panel de control') }}

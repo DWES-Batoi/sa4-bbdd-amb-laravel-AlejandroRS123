@@ -6,9 +6,15 @@ use Illuminate\Http\Request;
 use App\Models\Partit;
 use App\Models\Equip;
 use App\Models\Estadi;
+use App\Events\PartitActualitzat;
+use App\Services\ClassificacioService;
 
 class PartitController extends Controller
 {
+    public function __construct(private ClassificacioService $classificacioService)
+    {
+    }
+    
     // GET /partits
     public function index()
     {
@@ -33,7 +39,7 @@ class PartitController extends Controller
             'estadi_id' => 'required|exists:estadis,id',
             'data' => 'required|date',
             'jornada' => 'required|integer',
-            'gols' => 'nullable|string',
+            'gols' => 'nullable|string|regex:/^\d*-\d*$/',
         ]);
 
         Partit::create($validated);
@@ -60,19 +66,51 @@ class PartitController extends Controller
     // PUT/PATCH /partits/{partit}
     public function update(Request $request, Partit $partit)
     {
-        $validated = $request->validate([
-            'local_id' => 'required|exists:equips,id',
-            'visitant_id' => 'required|exists:equips,id',
-            'estadi_id' => 'required|exists:estadis,id',
-            'data' => 'required|date',
-            'jornada' => 'required|integer',
-            'gols' => 'nullable|string',
+        $data = $request->validate([
+            'local_id' => ['required','exists:equips,id','different:visitant_id'],
+            'visitant_id' => ['required','exists:equips,id'],
+            'estadi_id' => ['required','exists:estadis,id'],
+            'data' => ['required','date'],
+            'jornada' => ['required','integer','min:1'],
+            'gols' => ['nullable','string','regex:/^\d*-\d*$/'],
         ]);
 
-        $partit->update($validated);
+        // Parsejar gols "2-1" a gols_local i gols_visitant
+        if (!empty($data['gols'])) {
+            $gols = explode('-', $data['gols']);
+            $data['gols_local'] = isset($gols[0]) ? (int) trim($gols[0]) : 0;
+            $data['gols_visitant'] = isset($gols[1]) ? (int) trim($gols[1]) : 0;
+        } else {
+            $data['gols_local'] = 0;
+            $data['gols_visitant'] = 0;
+            $data['gols'] = '0-0';
+        }
 
-        return redirect()->route('partits.index')
-            ->with('success', 'Partit actualitzat correctament!');
+        // 1) posicions abans
+        $abans = $this->classificacioService->posicionsPerEquip();
+
+        // 2) actualitza el partit
+        $partit->update($data);
+
+        // 3) posicions després
+        $despres = $this->classificacioService->posicionsPerEquip();
+
+        // 4) calcula delta (+ = puja, - = baixa)
+        $delta = [];
+        foreach ($despres as $equipId => $posDespres) {
+            $posAbans = $abans[$equipId] ?? $posDespres;
+            $deltaPos = $posAbans - $posDespres; // si passa de 5 a 3 => +2 (puja)
+            if ($deltaPos !== 0) {
+                $delta[] = ['equip_id' => $equipId, 'delta' => $deltaPos];
+            }
+        }
+
+        // 5) emet event (només si hi ha canvis)
+        if (!empty($delta)) {
+            event(new PartitActualitzat($delta));
+        }
+
+        return redirect()->route('partits.index')->with('success', 'Partit actualitzat.');
     }
 
     // DELETE /partits/{partit}
