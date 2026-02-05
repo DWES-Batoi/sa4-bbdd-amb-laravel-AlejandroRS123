@@ -17,18 +17,18 @@
                 <table class="w-full">
                     <thead class="bg-gray-50 dark:bg-gray-700">
                         <tr class="text-left border-b">
-                            <th class="p-3 font-semibold text-gray-700 dark:text-gray-300">Pos</th>
-                            <th class="p-3 font-semibold text-gray-700 dark:text-gray-300">Equip</th>
+                            <th class="font-mold text-gray-700 dark:text-gray-300">Pos</th>
+                            <th class="font-semibold text-gray-700 dark:text-gray-300">Equip</th>
                         </tr>
                     </thead>
 
                     <tbody id="classificacio-tbody">
                         @foreach($equips as $equip)
                             <tr data-equip-id="{{ $equip->id }}" class="border-b hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
-                                <td class="p-3 font-semibold">
+                                <td class="font-semibold">
                                     {{ $posicions[$equip->id] ?? '-' }}
                                 </td>
-                                <td class="p-3">
+                                <td>
                                     {{ $equip->nom }}
                                 </td>
                             </tr>
