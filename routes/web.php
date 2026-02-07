@@ -1,36 +1,36 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ClassificacioController;
 use App\Http\Controllers\EquipController;
 use App\Http\Controllers\EstadiController;
 use App\Http\Controllers\JugadorController;
 use App\Http\Controllers\PartitController;
+use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ClassificacioController;
 
 // Página de bienvenida
-Route::get('/', fn() => view('welcome'));
+Route::get('/', fn () => view('welcome'));
 
 // Dashboard protegido
-Route::get('/dashboard', fn() => view('dashboard'))
+Route::get('/dashboard', fn () => view('dashboard'))
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
 Route::get('/classificacio', [ClassificacioController::class, 'index'])
     ->name('classificacio.index');
 Route::middleware(['auth', 'not.convidat'])->group(function () {
-Route::resource('equips', EquipController::class)->except(['index', 'show']);
-Route::resource('jugadors', JugadorController::class)->except(['index', 'show']);
-// ...altres recursos d’escriptura
+    Route::resource('equips', EquipController::class)->except(['index', 'show']);
+    Route::resource('jugadors', JugadorController::class)->except(['index', 'show']);
+    // ...altres recursos d’escriptura
 });
 
 // Cambio de idioma
 Route::get('/locale/{locale}', function (string $locale) {
     $available = ['ca', 'es', 'en'];
 
-    if (!in_array($locale, $available, true)) {
+    if (! in_array($locale, $available, true)) {
         $locale = config('app.fallback_locale', 'en');
     }
 
@@ -98,4 +98,4 @@ Route::get('estadis/{estadi}', [EstadiController::class, 'show'])->name('estadis
 Route::get('jugadors/{jugador}', [JugadorController::class, 'show'])->name('jugadors.show');
 Route::get('partits/{partit}', [PartitController::class, 'show'])->name('partits.show');
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';
