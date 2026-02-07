@@ -12,15 +12,19 @@ RUN set -eux; \
       libpng-dev freetype-dev libjpeg-turbo-dev \
       libzip-dev linux-headers \
       nodejs npm; \
+    \
     # Dependencias de compilación (phpize, autoconf, etc.)
     apk add --no-cache --virtual .build-deps $PHPIZE_DEPS; \
+    \
     # Configurar e instalar extensiones nativas
     docker-php-ext-configure gd --with-freetype --with-jpeg; \
     docker-php-ext-install -j"$(nproc)" \
       pdo pdo_mysql mbstring exif pcntl bcmath intl gd zip; \
+    \
     # PECL redis (requiere phpize/autoconf)
     pecl install redis; \
     docker-php-ext-enable redis; \
+    \
     # Limpiar deps de build para reducir tamaño
     apk del .build-deps
 
@@ -33,6 +37,14 @@ RUN usermod -u ${WWWUSER} www-data && groupmod -g ${WWWGROUP} www-data
 USER www-data
 WORKDIR /var/www/html
 
-# Instalar dependencias del proyecto si ya hay composer.json (no falla si no existe)
+# Instalar dependencias del proyecto si ya hay composer.json
 RUN if [ -f composer.json ]; then composer install --no-interaction; fi
 
+# -----------------------------
+# ✅ NUEVO: arrancar PHP-FPM automáticamente
+# -----------------------------
+# Exponer el puerto 9000 para Nginx
+EXPOSE 9000
+
+# Arrancar PHP-FPM en primer plano
+CMD ["php-fpm"]
